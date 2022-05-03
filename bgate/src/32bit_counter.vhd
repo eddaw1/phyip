@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity thirty_two_bit_counter is
+entity debounced_button is
     -- ramp up for 10ns*(2^21-1) or 0.02s. Seems to be about right for the transitions
     -- between the off state and the on state for the push buttons for the BASYS board.
     Generic ( COUNTWIDTH : integer := 21;
@@ -11,9 +11,9 @@ entity thirty_two_bit_counter is
     Port ( clk : in STD_LOGIC;
            button_in : in STD_LOGIC;
            gate_out : out STD_LOGIC);
-end thirty_two_bit_counter;
+end debounced_button;
 
-architecture Behavioral of thirty_two_bit_counter is
+architecture Behavioral of debounced_button is
   signal cyclecounter_d, cyclecounter_q : UNSIGNED (COUNTWIDTH-1 downto 0) 
                                           := to_unsigned(0,COUNTWIDTH);
   signal bstore_d, bstore_q : STD_LOGIC_VECTOR(DENOISEWIDTH+PREWIDTH-1 downto 0);
